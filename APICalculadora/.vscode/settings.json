@@ -1,0 +1,11 @@
+{
+  "C_Cpp.default.compilerPath": "cl.exe",
+  "editor.quickSuggestions": false,
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.parameterHints.enabled": false,
+  "editor.hover.enabled": false,
+  "editor.inlineSuggest.enabled": false,
+  "github.copilot.enable": {
+    "*": false
+  }
+}

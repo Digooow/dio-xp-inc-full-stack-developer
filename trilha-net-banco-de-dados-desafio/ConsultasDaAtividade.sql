@@ -1,0 +1,12 @@
+select nome, ano from Filmes;
+select nome, Ano, Duracao from Filmes order by Ano;
+select nome, ano, Duracao from Filmes where Ano = 1985;
+select nome, Ano, Duracao from Filmes where Ano = 1997;
+select nome, Ano, Duracao from Filmes where Ano > 2000;
+select nome, ano, duracao from filmes where Duracao > 100 and Duracao < 150 order by Duracao;
+select Ano, count(*) as Quantidade from filmes group by Ano order by Quantidade desc;
+select Id, PrimeiroNome, UltimoNome, Genero from Atores where genero = 'M';
+select Id, PrimeiroNome, UltimoNome, Genero from Atores where genero = 'F' order by PrimeiroNome;
+SELECT f.Nome AS Nome_Filme, g.Genero AS Nome_Genero FROM filmes f INNER JOIN filmesgenero fg ON f.Id = fg.IdFilme INNER JOIN generos g ON fg.IdGenero = g.Id;
+SELECT f.Nome AS Nome_Filme, g.Genero AS Nome_Genero FROM filmes f INNER JOIN filmesgenero fg ON f.Id = fg.IdFilme INNER JOIN generos g ON fg.IdGenero = g.Id where g.Genero = 'Mistério';
+select f.nome AS Nome_filme, a.PrimeiroNome, a.UltimoNome, ef.Papel FROM filmes f inner join ElencoFilme ef on f.Id = ef.IdFilme inner join atores a on ef.IdAtor = a.Id;
