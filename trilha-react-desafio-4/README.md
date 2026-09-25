@@ -1,100 +1,127 @@
-Este projeto implementa uma tela de cadastro de usuário com validações utilizando React com TypeScript, React Hook Form, Zod para validação de esquemas e styled-components para estilização. O objetivo é demonstrar boas práticas de desenvolvimento com formulários controlados e tipagem estática.
+# Formulário de cadastro com React e TypeScript
 
-Funcionalidades
+Atividade desenvolvida durante o curso **DIO XP Inc. Full Stack Developer**, na trilha de React. O projeto pratica a criação de um formulário de cadastro tipado, com componentes reutilizáveis, validação de dados e estilização usando `styled-components`.
 
-A tela de cadastro contém os seguintes campos:
+## Sobre a atividade
 
-Nome completo (obrigatório, mínimo 3 caracteres)
+A aplicação apresenta uma tela de criação de conta com validações no front-end. O formulário utiliza o React Hook Form para controlar os campos e o Zod para declarar e executar as regras de validação.
 
-E-mail (obrigatório, formato válido)
+Após o preenchimento válido, os dados são exibidos no console e uma mensagem de sucesso é apresentada. A integração com um backend ainda não está ativa; o projeto já possui uma instância do Axios preparada para uma futura API.
 
-Senha (obrigatório, mínimo 6 caracteres)
+## Funcionalidades
 
-Confirmação de senha (deve ser idêntica à senha)
+- Formulário de criação de conta;
+- Validação do nome com, no mínimo, três caracteres;
+- Validação de e-mail;
+- Validação de senha com, no mínimo, seis caracteres;
+- Confirmação de senha igual à senha informada;
+- Validação da data de nascimento no formato `YYYY-MM-DD`;
+- Restrição de idade mínima de 18 anos;
+- Aceite obrigatório dos termos e condições;
+- Mensagens de erro exibidas junto aos campos inválidos;
+- Estado de submissão com alteração do texto do botão para `Cadastrando...`;
+- Componentes reutilizáveis de entrada e botão;
+- Página de login implementada como complemento, ainda não conectada ao fluxo principal do `App`.
 
-Data de nascimento (obrigatória, formato YYYY-MM-DD, idade mínima de 18 anos)
+## Tecnologias utilizadas
 
-Aceite dos termos (checkbox obrigatório)
+- [React](https://react.dev/) 19;
+- [TypeScript](https://www.typescriptlang.org/);
+- [Vite](https://vite.dev/);
+- [React Hook Form](https://react-hook-form.com/);
+- [Zod](https://zod.dev/);
+- [@hookform/resolvers](https://github.com/react-hook-form/resolvers);
+- [styled-components](https://styled-components.com/);
+- [Axios](https://axios-http.com/);
+- ESLint.
 
-Todas as validações são executadas em tempo real e as mensagens de erro são exibidas abaixo de cada campo. O botão de envio é desabilitado durante o processamento da submissão.
+## Pré-requisitos
 
-Também há uma tela de login simples com e-mail e senha, apenas para complementar a navegação.
+- Node.js instalado;
+- npm disponível no terminal.
 
-Tecnologias utilizadas
+## Como executar
 
-React 18
+No terminal, acesse a pasta da atividade e instale as dependências:
 
-TypeScript
-
-React Hook Form (gerenciamento de estado e submissão)
-
-Zod (validação de esquemas)
-
-@hookform/resolvers (integração do Zod com React Hook Form)
-
-styled-components (estilização)
-
-Estrutura de pastas
-
-src/
-components/
-Button/
-index.tsx
-styles.ts
-Input/
-index.tsx
-styles.ts
-pages/
-login/
-index.tsx
-styles.ts
-register/
-index.tsx
-styles.ts
-validations/
-registerSchema.ts
-services/
-api.ts
-styles/
-global.ts
-App.tsx
-main.tsx
-
-Como executar o projeto
-
-Certifique-se de ter Node.js instalado (versão 16 ou superior).
-
-Clone este repositório.
-
-No terminal, navegue até a pasta do projeto e instale as dependências com o comando:
+```bash
+cd trilha-react-desafio-4
 npm install
+```
 
-Para iniciar o servidor de desenvolvimento, execute:
+Inicie o servidor de desenvolvimento:
+
+```bash
 npm run dev
+```
 
-Acesse a aplicação em http://localhost:5173 (ou porta indicada no terminal).
+Depois, acesse a URL informada pelo Vite, normalmente:
 
-Validações implementadas
+```text
+http://localhost:5173
+```
 
-Nome: mínimo de 3 caracteres.
+## Scripts disponíveis
 
-E-mail: formato válido (usando a validação nativa do Zod).
+| Comando | Descrição |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento do Vite |
+| `npm run build` | Executa a verificação do TypeScript e gera a build de produção |
+| `npm run lint` | Analisa o código com ESLint |
+| `npm run preview` | Serve localmente a build de produção |
 
-Senha: mínimo de 6 caracteres.
+## Estrutura do projeto
 
-Confirmação de senha: deve ser igual à senha. Esta validação é feita no nível do objeto com refine do Zod.
+```text
+trilha-react-desafio-4/
+├── public/                         # Arquivos públicos da aplicação
+├── src/
+│   ├── assets/                     # Imagens e demais recursos
+│   ├── components/
+│   │   ├── button/                 # Botão reutilizável
+│   │   ├── header/                 # Componente de cabeçalho
+│   │   └── input/                  # Campo de entrada reutilizável
+│   ├── pages/
+│   │   ├── login/                  # Tela de login complementar
+│   │   └── register/               # Tela principal de cadastro
+│   ├── services/
+│   │   └── api.ts                  # Cliente Axios preparado para a API
+│   ├── styles/
+│   │   └── global.ts               # Estilos globais
+│   ├── validations/
+│   │   └── registerSchema.ts       # Schema e tipo do formulário
+│   ├── App.tsx                     # Composição da aplicação
+│   └── main.tsx                    # Ponto de entrada do React
+├── index.html
+├── package.json
+└── README.md
+```
 
-Data de nascimento: formato YYYY-MM-DD e idade calculada para garantir que o usuário tenha pelo menos 18 anos.
+## Validação do formulário
 
-Aceite dos termos: o checkbox deve estar marcado.
+As regras estão centralizadas em `src/validations/registerSchema.ts`:
 
-Todas as mensagens de erro são personalizadas e exibidas dinamicamente.
+- `name`: texto com pelo menos três caracteres;
+- `email`: endereço de e-mail válido;
+- `password`: texto com pelo menos seis caracteres;
+- `confirmPassword`: deve ser igual a `password`;
+- `birthDate`: data no formato `YYYY-MM-DD` e idade mínima de 18 anos;
+- `terms`: deve ser `true`.
 
-API e integração
+O tipo `RegisterFormData` é inferido diretamente do schema do Zod, mantendo a validação e a tipagem alinhadas.
 
-O projeto possui um arquivo src/services/api.ts configurado com axios, pronto para ser integrado com um backend real. As funções de submissão já contêm chamadas para a API (comentadas) e tratamento de erro.
+## Aprendizados
 
-Considerações finais
+Esta atividade reforça:
 
-Este projeto serve como base para sistemas de autenticação e cadastro, com foco em segurança e usabilidade. A arquitetura é escalável e permite a adição de novos campos e validações facilmente.
+- composição de componentes funcionais;
+- tipagem de formulários com TypeScript;
+- gerenciamento de campos e submissão com React Hook Form;
+- validação declarativa e personalizada com Zod;
+- integração entre bibliotecas por meio do `zodResolver`;
+- reutilização de estilos e componentes com `styled-components`;
+- organização de uma aplicação React por responsabilidades.
 
+## Curso
+
+Este projeto faz parte do **DIO XP Inc. Full Stack Developer**, formação da [Digital Innovation One](https://www.dio.me/) voltada ao desenvolvimento de aplicações full stack.
