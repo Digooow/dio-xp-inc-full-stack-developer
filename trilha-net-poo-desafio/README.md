@@ -1,22 +1,124 @@
-# DIO - Trilha .NET - Programação orientada a objetos
-www.dio.me
+# Desafio de POO com C#
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de orientação a objetos, da trilha .NET da DIO.
+Implementação do desafio de **Programação Orientada a Objetos** da trilha
+**.NET do curso DIO XP Inc. Full Stack Developer**.
 
-## Contexto
-Você é responsável por modelar um sistema que trabalha com celulares. Para isso, foi solicitado que você faça uma abstração de um celular e disponibilize maneiras de diferentes marcas e modelos terem seu próprio comportamento, possibilitando um maior reuso de código e usando a orientação a objetos.
+## Sobre a atividade
 
-## Proposta
-Você precisa criar um sistema em .NET, do tipo console, mapeando uma classe abstrata e classes específicas para dois tipos de celulares: Nokia e iPhone. 
-Você deve criar as suas classes de acordo com o diagrama abaixo:
+O desafio propõe a criação de uma aplicação console para representar
+smartphones de diferentes marcas. A solução utiliza uma classe abstrata como
+base e classes derivadas para implementar comportamentos específicos de um
+Nokia e de um iPhone.
 
-![Diagrama classes](Imagens/diagrama.png)
+O objetivo é praticar os principais conceitos de orientação a objetos em C#:
 
-## Regras e validações
-1. A classe **Smartphone** deve ser abstrata, não permitindo instanciar e servindo apenas como modelo.
-2. A classe **Nokia** e **Iphone** devem ser classes filhas de Smartphone.
-3. O método **InstalarAplicativo** deve ser sobrescrito na classe Nokia e iPhone, pois ambos possuem diferentes maneiras de instalar um aplicativo.
+- abstração;
+- herança;
+- polimorfismo;
+- encapsulamento;
+- sobrescrita de métodos.
 
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+## Funcionalidades
+
+Cada smartphone possui:
+
+- número de telefone;
+- modelo;
+- IMEI;
+- capacidade de memória;
+- operação para realizar uma ligação;
+- operação para receber uma ligação;
+- instalação de aplicativos com comportamento específico por marca.
+
+O método `InstalarAplicativo` é abstrato em `Smartphone` e sobrescrito nas
+classes `Nokia` e `Iphone`, permitindo que cada tipo apresente sua própria
+mensagem de instalação.
+
+## Estrutura do projeto
+
+```text
+trilha-net-poo-desafio/
+├── Imagens/
+│   └── diagrama.png
+├── Models/
+│   ├── Iphone.cs
+│   ├── Nokia.cs
+│   └── Smartphone.cs
+├── DesafioPOO.csproj
+├── Program.cs
+└── README.md
+```
+
+### Diagrama de classes
+
+![Diagrama de classes](Imagens/diagrama.png)
+
+## Tecnologias utilizadas
+
+- C#;
+- .NET 6;
+- aplicação console;
+- Visual Studio, Visual Studio Code ou outra IDE compatível com .NET.
+
+## Como executar
+
+### Pré-requisitos
+
+Instale o [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) ou
+uma versão compatível com o projeto.
+
+### Executando pela linha de comando
+
+No diretório da atividade, execute:
+
+```bash
+dotnet restore
+dotnet run
+```
+
+Para gerar somente a compilação:
+
+```bash
+dotnet build
+```
+
+## Exemplo de saída
+
+```text
+Smartphone Nokia
+Ligando...
+Recebendo ligação...
+Instalando WhatsApp no Nokia...
+Smartphone Iphone
+Ligando...
+Recebendo ligação...
+Instalando Instagram no Iphone...
+```
+
+## Conceitos aplicados
+
+### Abstração
+
+A classe `Smartphone` é abstrata e define a estrutura comum dos aparelhos.
+Por isso, ela não pode ser instanciada diretamente.
+
+### Herança
+
+`Nokia` e `Iphone` herdam de `Smartphone` e reutilizam seus atributos,
+construtor e comportamentos comuns.
+
+### Polimorfismo
+
+As instâncias são referenciadas pelo tipo `Smartphone`, mas executam a
+implementação correspondente de `InstalarAplicativo` em cada classe concreta.
+
+### Encapsulamento
+
+As informações específicas do aparelho, como modelo, IMEI e memória, são
+mantidas na classe base, enquanto as operações são expostas por métodos.
+
+## Referência
+
+Este projeto foi desenvolvido como parte do desafio prático da formação
+**DIO XP Inc. Full Stack Developer**, no módulo de **Programação Orientada a
+Objetos com .NET**.
