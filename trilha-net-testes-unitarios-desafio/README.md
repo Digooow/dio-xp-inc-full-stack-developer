@@ -1,17 +1,47 @@
 # DIO - Trilha .NET - Testes Unitários com C#
+
+![.NET](https://img.shields.io/badge/.NET-6.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-10-239120?style=for-the-badge&logo=csharp&logoColor=white)
+![xUnit](https://img.shields.io/badge/Testes-xUnit-512BD4?style=for-the-badge)
+
+> Atividade desenvolvida como parte do curso **DIO XP Inc. - Full Stack Developer**, na trilha de .NET.
+
+Este projeto contém a implementação de testes unitários em C# utilizando o framework **xUnit**, validando regras de negócio relacionadas a listas de números inteiros e manipulação de strings.
+
+**[DIO](https://www.dio.me/)**
+
 www.dio.me
 
 ## Desafio de projeto
+
 Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de Testes Unitários com C#, da trilha .NET da DIO.
 
 ## Contexto
+
 Você está trabalhando em um sistema, e seus gestores relataram que frequentemente há problemas no software: bugs, funcionalidades que estavam funcionando de repente não funcionam mais, problemas de validações, entre outros. Os clientes já começam a duvidar da qualidade do código.
 
 Feito isso, você sugeriu a implementação de testes unitários: escrever testes cobrindo as partes mais críticas do sistema, com cenários positivos e negativos, a fim de ter uma rastreabilidade e controle do código, melhorando assim a qualidade desse sistema.
 
 Os gestores aceitaram a sua ideia, e com isso, você precisa implementar testes unitários no sistema.
 
+## Objetivos da atividade
+
+- Praticar a estrutura **Arrange, Act e Assert**.
+- Implementar testes unitários com **xUnit**.
+- Validar cenários positivos e negativos.
+- Aumentar a confiabilidade das regras de negócio.
+- Executar a suíte de testes pela CLI do .NET.
+
+## Tecnologias utilizadas
+
+- C#
+- .NET 6
+- xUnit
+- Microsoft.NET.Test.Sdk
+- Coverlet para coleta de cobertura de testes
+
 ## Premissas
+
 O sistema hoje possui dois projetos: um do tipo console, e um do tipo testes com **xUnit**. O projeto do tipo console possui duas classes em que são realizadas as lógicas principais: **ValidacoesLista** e **ValidacoesString**. Essas classes contém métodos em comum que são usados para realizar diversas validações em determinados cenários.
 
 O projeto de testes possui as classes de teste **ValidacoesListaTests** e **ValidacoesStringTests**, assim como seus métodos para validar o projeto do tipo console, porém estão incompletos. 
@@ -76,6 +106,61 @@ O projeto está estruturado da seguinte maneira:
 
 ![Métodos Swagger](Imagens/projeto.png)
 
+```text
+trilha-net-testes-unitarios-desafio/
+├── Imagens/
+│   └── projeto.png
+├── TestesUnitarios.Desafio.Console/
+│   ├── Services/
+│   │   ├── ValidacoesLista.cs
+│   │   └── ValidacoesString.cs
+│   └── Program.cs
+├── TestesUnitarios.Desafio.Tests/
+│   ├── ValidacoesListaTests.cs
+│   ├── ValidacoesStringTests.cs
+│   └── Usings.cs
+├── TestesUnitarios.Desafio.sln
+└── README.md
+```
+
+## Como executar
+
+### Pré-requisitos
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) instalado.
+
+### Restaurar as dependências
+
+Na pasta desta atividade, execute:
+
+```bash
+dotnet restore
+```
+
+### Executar os testes
+
+```bash
+dotnet test
+```
+
+O projeto possui **10 testes unitários**: 6 testes para `ValidacoesLista` e 4 testes para `ValidacoesString`.
+
+### Executar o projeto de console
+
+```bash
+dotnet run --project TestesUnitarios.Desafio.Console
+```
+
+O projeto de console concentra as classes e regras de negócio exercitadas pelos testes.
 
 ## Solução
+
 O código de testes está pela metade, e você deverá dar continuidade implementando os testes descritos acima, para que no final, tenhamos um programa de testes funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+
+## Aprendizados
+
+Esta atividade reforça a importância de testar pequenas unidades de código de forma isolada, cobrindo tanto os comportamentos esperados quanto os cenários em que uma validação deve retornar falso. Os testes também funcionam como documentação executável das regras do sistema.
+
+## Curso
+
+Este projeto faz parte do curso **DIO XP Inc. - Full Stack Developer**, oferecido pela [Digital Innovation One (DIO)](https://www.dio.me/).
