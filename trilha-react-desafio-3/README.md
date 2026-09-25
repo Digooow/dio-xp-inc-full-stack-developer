@@ -1,70 +1,143 @@
-# Getting Started with Create React App
+# DIO.me - Interface da plataforma
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto desenvolvido como parte do **Bootcamp DIO XP Inc. Full Stack Developer**, na trilha de React. A atividade reproduz uma interface inspirada na plataforma DIO, com páginas de apresentação, autenticação, cadastro de usuários e feed de conteúdos.
 
-## Available Scripts
+## Sobre o projeto
 
-In the project directory, you can run:
+O objetivo deste desafio é praticar a construção de uma aplicação React organizada em componentes reutilizáveis, com navegação entre páginas, formulários controlados e integração com uma API local simulada.
 
-### `npm start`
+### Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Página inicial com apresentação da plataforma;
+- Navegação entre as páginas por meio do React Router;
+- Tela de login com validação de campos;
+- Cadastro de novos usuários;
+- Validação de confirmação e tamanho mínimo da senha;
+- Persistência dos usuários em uma API fake com JSON Server;
+- Redirecionamento para o feed após o login;
+- Feed com cards de publicações;
+- Ranking dos cinco principais usuários;
+- Layout estilizado com `styled-components`;
+- Interface responsiva para diferentes tamanhos de tela.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tecnologias utilizadas
 
-### `npm test`
+- [React](https://react.dev/) 18;
+- [React Router](https://reactrouter.com/);
+- [React Hook Form](https://react-hook-form.com/);
+- [Axios](https://axios-http.com/);
+- [Styled Components](https://styled-components.com/);
+- [React Icons](https://react-icons.github.io/react-icons/);
+- [JSON Server](https://github.com/typicode/json-server);
+- Create React App.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Como executar
 
-### `npm run build`
+### Pré-requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js instalado;
+- npm ou Yarn.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Instalação
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone este repositório:
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/Digooow/dio-xp-inc-full-stack-developer.git
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Acesse a pasta da atividade:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   cd dio-xp-inc-full-stack-developer/trilha-react-desafio-3
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Instale as dependências:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+4. Inicie a aplicação e a API fake simultaneamente:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```bash
+   npm run dev
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-### Code Splitting
+O JSON Server ficará disponível em [http://localhost:3001](http://localhost:3001). A aplicação utiliza esse endereço para consultar e cadastrar usuários.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Executando separadamente
 
-### Analyzing the Bundle Size
+Para iniciar apenas a aplicação React:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+Para iniciar apenas a API fake:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm run api
+```
 
-### Advanced Configuration
+> O script `npm run api` utiliza a porta `8001`. Para executar a API na porta esperada pela aplicação (`3001`), prefira o comando `npm run dev` ou execute manualmente:
+>
+> ```bash
+> npx json-server --watch db.json --port 3001
+> ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Acesso para teste
 
-### Deployment
+O arquivo [`db.json`](./db.json) contém usuários de exemplo. É possível testar o login com:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```text
+E-mail: pablo@email.com
+Senha: 123456
+```
 
-### `npm run build` fails to minify
+Também é possível criar uma nova conta pela página de cadastro. Os dados serão adicionados à coleção `users` do JSON Server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Estrutura do projeto
+
+```text
+trilha-react-desafio-3/
+├── public/                 # Arquivos públicos e ícones da aplicação
+├── src/
+│   ├── assets/             # Imagens e recursos visuais
+│   ├── components/         # Componentes reutilizáveis
+│   ├── pages/              # Páginas Home, Login, Cadastro e Feed
+│   ├── services/           # Configuração do cliente HTTP
+│   ├── styles/             # Estilos globais
+│   ├── App.js              # Rotas principais da aplicação
+│   └── index.js            # Ponto de entrada do React
+├── db.json                 # Banco de dados local usado pelo JSON Server
+└── package.json            # Dependências e scripts do projeto
+```
+
+## Scripts disponíveis
+
+| Comando | Descrição |
+| --- | --- |
+| `npm start` | Inicia o servidor de desenvolvimento do React |
+| `npm run dev` | Inicia o React e o JSON Server simultaneamente |
+| `npm run api` | Inicia o JSON Server na porta `8001` |
+| `npm test` | Executa os testes do projeto |
+| `npm run build` | Gera a versão otimizada para produção |
+
+## Aprendizados
+
+Durante a atividade foram praticados conceitos importantes do desenvolvimento front-end com React:
+
+- criação e composição de componentes;
+- reutilização de propriedades e eventos;
+- navegação declarativa com rotas;
+- gerenciamento e validação de formulários;
+- consumo de endpoints HTTP;
+- organização de estilos com `styled-components`;
+- separação entre páginas, componentes, serviços e estilos.
+
+## Curso
+
+Esta atividade faz parte do **DIO XP Inc. Full Stack Developer**, uma formação da [Digital Innovation One](https://www.dio.me/) voltada ao desenvolvimento de aplicações full stack.
