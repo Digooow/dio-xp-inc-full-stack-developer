@@ -1,91 +1,97 @@
-# DIO - Trilha .NET - Banco de Dados
-www.dio.me
+# Desafio de Banco de Dados: Filmes
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de banco de dados, da trilha .NET da DIO.
+Atividade desenvolvida durante o curso **[DIO XP Inc. - Full Stack Developer](https://www.dio.me/)**, na trilha de .NET, para praticar consultas SQL em um banco de dados relacional.
 
-## Contexto
-Você é responsável pelo banco de dados de um site de filmes, onde são armazenados dados sobre os filmes e seus atores. Sendo assim, foi solicitado para que você realize uma consulta no banco de dados com o objetivo de trazer alguns dados para análises.
+## Sobre a atividade
 
-## Proposta
-Você precisará realizar 12 consultas ao banco de dados, cada uma retornando um tipo de informação.
-O seu banco de dados está modelado da seguinte maneira:
+O desafio simula o banco de dados de um site de filmes. A partir de uma base previamente modelada e populada, foram elaboradas 12 consultas para obter informações sobre filmes, atores, gêneros e elenco.
 
-![Diagrama banco de dados](Imagens/diagrama.png)
+Os exercícios praticam:
 
-As tabelas sao descritas conforme a seguir:
+- seleção e projeção de colunas com `SELECT`;
+- filtros com `WHERE`;
+- ordenação com `ORDER BY`;
+- operadores relacionais e lógicos;
+- agregação com `COUNT`;
+- agrupamento com `GROUP BY`;
+- relacionamentos entre tabelas com `INNER JOIN`;
+- uso de aliases para deixar os resultados mais legíveis.
 
-**Filmes**
+## Tecnologias e ferramentas
 
-Tabela responsável por armazenar informações dos filmes.
+- **SQL Server**
+- **Transact-SQL (T-SQL)**
+- **SQL Server Management Studio (SSMS)** ou outra ferramenta compatível
 
-**Atores**
+## Estrutura do projeto
 
-Tabela responsável por armazenar informações dos atores.
+```text
+trilha-net-banco-de-dados-desafio/
+├── ConsultasDaAtividade.sql  # 12 consultas solicitadas no desafio
+├── Script Filmes.sql          # Criação e carga do banco Filmes
+├── Imagens/
+│   ├── diagrama.png           # Diagrama do modelo relacional
+│   └── 1.png ... 12.png       # Resultados esperados
+└── README.md
+```
 
-**Generos**
+## Modelo de dados
 
-Tabela responsável por armazenar os gêneros dos filmes.
+![Diagrama do banco de dados](Imagens/diagrama.png)
 
-**ElencoFilme**
+O banco de dados `Filmes` é composto pelas seguintes tabelas:
 
-Tabela responsável por representar um relacionamento do tipo muitos para muitos entre filmes e atores, ou seja, um ator pode trabalhar em muitos filmes, e filmes
-podem ter muitos atores.
+| Tabela | Descrição |
+| --- | --- |
+| `Filmes` | Armazena o nome, o ano de lançamento e a duração dos filmes. |
+| `Atores` | Armazena o nome e o gênero dos atores. |
+| `Generos` | Armazena os gêneros disponíveis. |
+| `ElencoFilme` | Relaciona atores e filmes e registra o papel interpretado. |
+| `FilmesGenero` | Relaciona filmes e gêneros. |
 
-**FilmesGenero**
+`ElencoFilme` e `FilmesGenero` são tabelas associativas que representam relacionamentos muitos-para-muitos:
 
-Tabela responsável por representar um relacionamento do tipo muitos para muitos entre filmes e gêneros, ou seja, um filme pode ter mais de um gênero, e um genêro pode fazer parte de muitos filmes.
+- um ator pode participar de vários filmes, e um filme pode ter vários atores;
+- um filme pode possuir vários gêneros, e um gênero pode estar associado a vários filmes.
 
-## Preparando o banco de dados
-Você deverá executar o arquivo **Script Filmes.sql** em seu banco de dados SQL Server, presente na pasta Scripts deste repositório ([ou clique aqui](Script%20Filmes.sql)). Esse script irá criar um banco chamado **Filmes**, contendo as tabelas e os dados necessários para você realizar este desafio.
+## Como executar
 
-## Objetivo
-Você deverá criar diversas consultas, com o objetivo de retornar os dados a seguir. Abaixo de cada pedido tem o retorno esperado. O seu retorno deve ser igual ao da imagem.
+1. Instale ou abra uma ferramenta compatível com SQL Server, como o SQL Server Management Studio.
+2. Abra o arquivo [`Script Filmes.sql`](Script%20Filmes.sql).
+3. Execute o script para criar o banco `Filmes`, suas tabelas e os dados da atividade.
+4. Abra o arquivo [`ConsultasDaAtividade.sql`](ConsultasDaAtividade.sql).
+5. Se necessário, selecione o banco `Filmes` na ferramenta de consulta.
+6. Execute as consultas individualmente ou em conjunto e compare os resultados com as imagens correspondentes na pasta `Imagens`.
 
-## 1 - Buscar o nome e ano dos filmes
+> **Atenção:** o script de preparação cria o banco de dados `Filmes`. Para executá-lo, o usuário do SQL Server precisa ter permissão para criar bancos de dados.
 
-![Exercicio 1](Imagens/1.png)
+## Consultas realizadas
 
-## 2 - Buscar o nome e ano dos filmes, ordenados por ordem crescente pelo ano
+| # | Consulta | Conteúdo praticado | Resultado |
+| ---: | --- | --- | --- |
+| 1 | Nome e ano dos filmes | `SELECT` | [Visualizar](Imagens/1.png) |
+| 2 | Filmes ordenados pelo ano | `ORDER BY` crescente | [Visualizar](Imagens/2.png) |
+| 3 | Filme lançado em 1985 | Filtro por ano, retornando nome, ano e duração | [Visualizar](Imagens/3.png) |
+| 4 | Filmes lançados em 1997 | Filtro com `WHERE` | [Visualizar](Imagens/4.png) |
+| 5 | Filmes lançados após 2000 | Operador `>` | [Visualizar](Imagens/5.png) |
+| 6 | Filmes com duração entre 100 e 150 minutos | Operadores `AND` e `ORDER BY` | [Visualizar](Imagens/6.png) |
+| 7 | Quantidade de filmes por ano | `COUNT`, `GROUP BY` e ordenação decrescente | [Visualizar](Imagens/7.png) |
+| 8 | Atores do gênero masculino | Filtro por valor textual | [Visualizar](Imagens/8.png) |
+| 9 | Atores do gênero feminino | Filtro e ordenação pelo primeiro nome | [Visualizar](Imagens/9.png) |
+| 10 | Filmes e seus gêneros | `INNER JOIN` entre três tabelas | [Visualizar](Imagens/10.png) |
+| 11 | Filmes do gênero Mistério | `INNER JOIN` com filtro | [Visualizar](Imagens/11.png) |
+| 12 | Filmes, atores e papéis | `INNER JOIN` entre filmes, elenco e atores | [Visualizar](Imagens/12.png) |
 
-![Exercicio 2](Imagens/2.png)
+As consultas completas estão no arquivo [`ConsultasDaAtividade.sql`](ConsultasDaAtividade.sql).
 
-## 3 - Buscar pelo filme de volta para o futuro, trazendo o nome, ano e a duração
+## Aprendizados
 
-![Exercicio 3](Imagens/3.png)
+Esta atividade reforçou a importância de compreender o modelo de dados antes de escrever uma consulta. Também permitiu praticar a combinação de filtros, ordenações, funções de agregação e junções para transformar dados relacionais em informações úteis para análise.
 
-## 4 - Buscar os filmes lançados em 1997
+## Curso
 
-![Exercicio 4](Imagens/4.png)
+Este projeto faz parte do repositório de estudos do bootcamp **DIO XP Inc. - Full Stack Developer**.
 
-## 5 - Buscar os filmes lançados APÓS o ano 2000
-
-![Exercicio 5](Imagens/5.png)
-
-## 6 - Buscar os filmes com a duracao maior que 100 e menor que 150, ordenando pela duracao em ordem crescente
-
-![Exercicio 6](Imagens/6.png)
-
-## 7 - Buscar a quantidade de filmes lançadas no ano, agrupando por ano, ordenando pela duracao em ordem decrescente
-
-![Exercicio 7](Imagens/7.png)
-
-## 8 - Buscar os Atores do gênero masculino, retornando o PrimeiroNome, UltimoNome
-
-![Exercicio 8](Imagens/8.png)
-
-## 9 - Buscar os Atores do gênero feminino, retornando o PrimeiroNome, UltimoNome, e ordenando pelo PrimeiroNome
-
-![Exercicio 9](Imagens/9.png)
-
-## 10 - Buscar o nome do filme e o gênero
-
-![Exercicio 10](Imagens/10.png)
-
-## 11 - Buscar o nome do filme e o gênero do tipo "Mistério"
-
-![Exercicio 11](Imagens/11.png)
-
-## 12 - Buscar o nome do filme e os atores, trazendo o PrimeiroNome, UltimoNome e seu Papel
-
-![Exercicio 12](Imagens/12.png)
+- Plataforma: [Digital Innovation One](https://www.dio.me/)
+- Trilha: .NET
+- Módulo: Banco de Dados
