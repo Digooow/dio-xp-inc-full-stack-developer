@@ -1,179 +1,197 @@
-BLOG PESSOAL - NEST.JS + SUPABASE + PRISMA
+﻿# Blog Pessoal API
 
-VISÃO GERAL
-------------
-Este projeto é uma API REST para um blog pessoal, desenvolvida com Nest.js,
-utilizando Supabase como provedor de autenticação e banco de dados PostgreSQL,
-e Prisma como ORM. O sistema permite registro e login de usuários,
-criação, listagem, atualização e exclusão de posts, com relacionamento
-entre usuários e posts.
+Projeto desenvolvido como atividade prática do curso de Desenvolvimento Full Stack da DIO. A proposta da atividade foi criar uma API REST para um blog pessoal usando NestJS, Supabase e Prisma, permitindo autenticação, gerenciamento de usuários e publicação de posts.
 
-TECNOLOGIAS UTILIZADAS
-----------------------
-- Node.js (v16+)
-- Nest.js (framework progressivo para Node.js)
+## Visão geral
+
+Este projeto implementa um backend para um blog pessoal com:
+
+- cadastro e login de usuários
+- autenticação com Supabase
+- proteção de rotas autenticadas
+- CRUD completo de posts
+- integração com PostgreSQL via Prisma
+- documentação da API com Swagger
+- validação de payloads com DTOs e decorators do NestJS
+
+A aplicação foi estruturada em módulos para separar responsabilidades de autenticação, usuários, posts e acesso ao banco de dados.
+
+## Contexto da atividade no curso DIO
+
+Este repositório faz parte de uma atividade de formação prática da DIO, onde o objetivo é aplicar conceitos de:
+
+- Node.js e TypeScript
+- NestJS como framework backend
+- autenticação e autorização
+- persistência com Prisma ORM
+- integração com serviços externos como Supabase
+- desenvolvimento de APIs REST seguindo boas práticas
+
+## Stack tecnológica
+
+- Node.js
+- NestJS
 - TypeScript
-- Supabase (Backend-as-a-Service)
-  - Autenticação (Auth) com JWT
-  - Banco de dados PostgreSQL
-  - (Futuro) Storage para upload de imagens
-- Prisma (ORM) com driver adapter @prisma/adapter-pg
-- pg (driver PostgreSQL)
-- class-validator / class-transformer (validação de dados)
-- @nestjs/swagger / swagger-ui-express (documentação da API)
-- @nestjs/config (variáveis de ambiente)
+- Prisma ORM
+- PostgreSQL
+- Supabase Auth
+- Swagger
+- class-validator / class-transformer
 
-PRÉ-REQUISITOS
---------------
-- Node.js 16+ instalado
-- Conta no Supabase (https://supabase.com)
-- Projeto criado no Supabase com as credenciais de acesso
-- Conhecimento básico de APIs REST
+## Funcionalidades
 
-CONFIGURAÇÃO DO PROJETO
------------------------
-1. Clone ou crie um novo projeto Nest.js:
-   $ nest new blog-pessoal
+### Autenticação
+- registro de usuário
+- login com email e senha
+- geração de token de acesso via Supabase
+- uso de guard para proteger rotas sensíveis
 
-2. Instale as dependências necessárias:
-   npm install @nestjs/config @supabase/supabase-js @prisma/client @prisma/adapter-pg pg
-   npm install class-validator class-transformer @nestjs/swagger swagger-ui-express
-   npm install -D prisma
+### Posts
+- criação de posts
+- listagem de posts públicos
+- consulta por ID
+- atualização de post do autor
+- exclusão de post do autor
 
-3. Inicialize o Prisma:
-   npx prisma init
+### Validação e documentação
+- DTOs para entrada de dados
+- validação automática com `ValidationPipe`
+- documentação interativa em Swagger
 
-4. Configure o banco de dados no arquivo .env.local:
-   DATABASE_URL="postgresql://postgres.seudb:[SENHA]@db.seudb.supabase.co:6543/postgres?pgbouncer=true&sslmode=no-verify"
-   SUPABASE_URL=https://seudb.supabase.co
-   SUPABASE_ANON_KEY=sua_chave_anon_publica
+## Estrutura do projeto
 
-5. Defina os modelos no schema.prisma (User e Post) com as devidas
-   relações e crie a migração inicial:
-   npx prisma migrate dev --name init
-
-6. No Supabase, crie as tabelas manualmente com SQL, ative o trigger
-   para sincronizar usuários de auth.users para public.users, e
-   configure as políticas de RLS conforme necessário.
-
-ESTRUTURA DE PASTAS PRINCIPAL
------------------------------
+```text
 src/
-  auth/                # Módulo de autenticação
-    dto/               # DTOs de registro e login
-    guards/            # SupabaseAuthGuard
-    auth.module.ts
-    auth.controller.ts
-    auth.service.ts
-  users/               # Módulo de usuários (busca na tabela pública)
-    users.module.ts
-    users.service.ts
-  posts/               # Módulo de posts (CRUD)
-    dto/               # CreatePostDto, UpdatePostDto
-    posts.module.ts
-    posts.controller.ts
-    posts.service.ts
-  prisma/              # PrismaService com adapter
-    prisma.module.ts
-    prisma.service.ts
-  common/              # Decorators e guardas globais
-    decorators/
-      public.decorator.ts
-      current-user.decorator.ts
-  app.module.ts
-  main.ts              # Configuração Swagger e IPv4first
+├── app.module.ts
+├── main.ts
+├── auth/
+│   ├── dto/
+│   ├── guards/
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   └── auth.service.ts
+├── common/
+│   └── decorators/
+├── posts/
+│   ├── dto/
+│   ├── posts.controller.ts
+│   ├── posts.module.ts
+│   └── posts.service.ts
+├── prisma/
+│   ├── prisma.module.ts
+│   └── prisma.service.ts
+├── users/
+│   ├── users.module.ts
+│   └── users.service.ts
+└── ...
+```
 
-VARIÁVEIS DE AMBIENTE (.env.local)
-----------------------------------
-DATABASE_URL=postgresql://postgres.seudb:senha@aws-0-ca-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true&sslmode=no-verify
-SUPABASE_URL=https://seudb.supabase.co
-SUPABASE_ANON_KEY=sb_publishable_...
-JWT_SECRET=chave_qualquer (usado internamente)
+## Requisitos
+
+Antes de executar o projeto, você precisa ter instalado:
+
+- Node.js 18+
+- npm ou yarn
+- uma conta no Supabase
+- um projeto PostgreSQL configurado no Supabase
+
+## Configuração
+
+1. Clone o repositório
+2. Acesse a pasta do projeto
+3. Crie um arquivo `.env.local` com as variáveis abaixo:
+
+```env
+DATABASE_URL="postgresql://usuario:senha@host:6543/postgres?pgbouncer=true&sslmode=no-verify"
+SUPABASE_URL="https://seu-projeto.supabase.co"
+SUPABASE_ANON_KEY="sua-chave-anon"
+JWT_SECRET="sua-chave-jwt"
 PORT=3000
+```
 
-END-POINTS DA API
------------------
-Método  Rota                   Descrição                          Token?
-POST    /auth/register         Registrar novo usuário            Não
-POST    /auth/login            Login e obtenção de access_token  Não
-POST    /posts                 Criar um novo post                Sim
-GET     /posts                 Listar todos os posts (público)   Não
-GET     /posts/:id             Obter um post específico          Não
-PUT     /posts/:id             Atualizar um post                 Sim (ser autor)
-DELETE  /posts/:id             Excluir um post                   Sim (ser autor)
+> A variável `DATABASE_URL` deve apontar para o banco PostgreSQL do Supabase ou outro banco PostgreSQL configurado para o projeto.
 
-Como testar a API:
-- Acesse a documentação Swagger em http://localhost:3000/api/docs
-- Use ferramentas como curl, Postman ou Insomnia
-- Após login, use o access_token no header: Authorization: Bearer <token>
+## Instalação
 
-PRINCIPAIS DESAFIOS E SOLUÇÕES
-------------------------------
-1. Erro "password authentication failed" - senha do banco incorreta.
-   Solução: Resetar a senha no painel do Supabase e atualizar o .env.
+```bash
+npm install
+```
 
-2. Erro de timeout IPv6 (ETIMEDOUT) - rede priorizando IPv6.
-   Solução: Adicionar setDefaultResultOrder('ipv4first') no main.ts.
+## Execução
 
-3. Erro SSL "self-signed certificate in certificate chain" - verificação
-   rigorosa do certificado.
-   Solução: Usar sslmode=no-verify na DATABASE_URL ou configurar
-   rejectUnauthorized: false no PrismaService.
+### Ambiente de desenvolvimento
 
-4. Erro "PrismaClientConstructorValidationError" - Prisma 7 exige driver
-   adapter.
-   Solução: Instalar @prisma/adapter-pg e instanciar PrismaPg no
-   construtor do PrismaService.
+```bash
+npm run start:dev
+```
 
-5. Erro "Foreign key constraint failed" ao criar posts - usuário não
-   existe na tabela public.users.
-   Solução: Criar trigger no Supabase para sincronizar auth.users com
-   public.users e/ou implementar fallback no código para inserir
-   o usuário automaticamente.
+A API ficará disponível em:
 
-6. Erro "Argument authorId: Expected String, provided Object" - passando
-   req.user inteiro em vez de req.user.id.
-   Solução: Modificar o controller para enviar apenas o ID.
+```text
+http://localhost:3000
+```
 
-7. Erro de coluna updated_at null na inserção manual - tabela exige
-   NOT NULL sem default.
-   Solução: Fornecer valor com NOW() na inserção ou alterar a coluna
-   com DEFAULT NOW().
+A documentação Swagger estará acessível em:
 
-MELHORIAS FUTURAS (SUGESTÕES)
------------------------------
-- Upload de imagens: utilizar o Storage do Supabase para capas dos posts.
-- Paginação: adicionar parâmetros skip e take no endpoint de listagem.
-- Comentários: criar nova tabela comments com relação a posts.
-- Categorias/Tags: relacionar posts com categorias (muitos-para-muitos).
-- Perfil de usuário: permitir editar nome, bio, foto de perfil.
-- Validações mais rigorosas: título mínimo, conteúdo obrigatório, etc.
-- Testes automatizados: unitários e e2e com Jest.
-- Migrations versionadas: usar prisma migrate dev para gerenciar o schema.
-- Logging estruturado: integrar com winston ou pino.
-- Dockerização: facilitar deploy em qualquer ambiente.
-- Frontend: construir uma interface React/Next.js para consumir a API.
-- Deploy: hospedar em Render, Vercel ou Railway.
+```text
+http://localhost:3000/api/docs
+```
 
-COMO EXECUTAR O PROJETO
------------------------
-- Instale as dependências: npm install
-- Configure o .env.local com as credenciais do Supabase
-- Rode as migrações (se necessário): npx prisma migrate dev
-- Inicie o servidor: npm run start:dev
-- Acesse a documentação: http://localhost:3000/api/docs
+## Endpoints principais
 
-COMANDOS ÚTEIS
---------------
-npx prisma generate         # Gerar o Prisma Client
-npx prisma studio           # Interface visual para o banco
-npx prisma db pull          # Introspectar banco existente
-npx prisma migrate dev      # Criar nova migração
-npm run start:dev           # Modo desenvolvimento com hot-reload
+| Método | Rota | Descrição |
+|---|---|---|
+| POST | `/auth/register` | Cadastro de usuário |
+| POST | `/auth/login` | Login e autenticação |
+| POST | `/posts` | Criação de post |
+| GET | `/posts` | Listagem de posts |
+| GET | `/posts/:id` | Busca de um post específico |
+| PUT | `/posts/:id` | Atualização de post |
+| DELETE | `/posts/:id` | Exclusão de post |
 
-CRÉDITOS
---------
-Projeto desenvolvido como desafio de criação de blog pessoal,
-utilizando Nest.js, Supabase e Prisma.
+### Observação
+- Rotas de criação, atualização e exclusão de posts exigem autenticação.
+- Rotas de consulta pública podem ser acessadas sem token.
 
-Data da conclusão: 16/08/2026
+## Banco de dados
+
+O projeto utiliza Prisma para modelagem e acesso ao banco de dados. A estrutura principal contém os modelos:
+
+- `User`
+- `Post`
+
+Esses modelos representam o relacionamento entre usuários e publicações do blog.
+
+## Como o projeto funciona
+
+1. O usuário se cadastra ou realiza login na rota de autenticação.
+2. O backend valida as credenciais e autentica o usuário por meio do Supabase.
+3. Ao acessar endpoints protegidos, o guard valida o token do usuário.
+4. O sistema persiste os dados no PostgreSQL utilizando Prisma.
+5. Os posts ficam vinculados ao autor por meio do relacionamento `authorId`.
+
+## Boas práticas aplicadas
+
+- modularização por domínio
+- uso de DTOs para validação de dados
+- uso de guard para autenticação
+- uso de decoradores e interceptadores
+- uso de ambiente via variáveis de configuração
+- integração com documentação automática da API
+
+## Possíveis melhorias
+
+- paginação na listagem de posts
+- upload de imagens para capa dos posts
+- comentários e categorias
+- filtros por autor, data e título
+- testes automatizados com Jest
+- deploy em plataforma de produção
+
+## Licença
+
+Este projeto foi desenvolvido como atividade educacional dentro do curso DIO e é destinado a fins de aprendizado.
+
+## Créditos
+
+Desenvolvido com foco em prática profissional e aplicada para o estudo de backend com NestJS, Prisma e Supabase.
